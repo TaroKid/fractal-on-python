@@ -3,14 +3,14 @@ import numpy as np
 import random
 
 position = np.array([0, 0])
-repeat = int(input("巴恩斯利蕨，請輸入迭代步數："))
+repeat = int(input("Barnsley fern. Input iteration steps: "))
 while True:
-    speed = int(input("請輸入繪製速度（1～10）："))
+    speed = int(input("Input drawing speed (1～10): "))
     if (speed >= 1) and (speed <= 10):
         steprange = 100 * speed
         break
     else:
-        print("數值不匹配，請重新輸入")
+        print("Please input the correct number.")
 points = []
 twig, long_offset = np.array([[0.86, 0.03], [-0.03, 0.86]]), np.array([0, 1.5])
 branch_one, uno_offset = np.array([[0.2, -0.25], [0.21, 0.23]]), np.array([0, 1.5])
@@ -44,6 +44,6 @@ for i in range(0, repeat, steprange):
     text.set_text(f'Points: {i + steprange}')
     plt.pause(1e-6)
 plt.ioff()
-print("繪圖完成！")
+print("Complete!")
 plt.show()
 
