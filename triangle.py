@@ -9,12 +9,12 @@ y = int(input("Input initial point y: "))
 position= [x, y]
 steps = int(input("Input iteration steps: "))
 while True:
-    speed = int(input("Input drawing speed (1 ~ 10): "))
-    if speed >= 1 and speed <= 10:
+    speed = int(input("Input drawing speed (1 ~ 30): "))
+    if speed >= 1 and speed <= 30:
         speed *= 100
         break
     else:
-        print("Please input the valid speed value")
+        print("Please input the valid speed value.")
 points = []
 
 for i in range(steps):
@@ -26,14 +26,17 @@ points = np.array(points)
 vertices = np.array(vertices)
 
 plt.ion()
-plt.title('Sierpinski triangle')
-plt.axis('equal')
+plt.title('Sierpinski Triangle')
+plt.gca().set_aspect('equal', adjustable='box')
+plt.xlim(-11, 11)
+plt.ylim(-1, 18)
 plt.plot(vertices[:, 0], vertices[:, 1], 'mv')
+scatter = plt.scatter([], [], s = 0.1, color = 'black')
 text = plt.text(-10, 13, '', fontsize=12, color='red')
 
-for i in range(0, steps, 500):
-    plt.plot(points[i: i + 500, 0], points[i: i + 500, 1], '.k')
-    text.set_text(f'Points: {i + 500}')
+for i in range(0, steps, speed):
+    scatter.set_offsets(points[0 : i + speed])
+    text.set_text(f'Points: {i + speed}')
     plt.pause(1e-6)
 text.set_text(f'Points: {steps}\nComplete!')
 plt.ioff()

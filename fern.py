@@ -10,7 +10,7 @@ while True:
         speed = 100 * speed
         break
     else:
-        print("Please input the correct number.")
+        print("Please input the valid speed value.")
 points = []
 twig, long_offset = np.array([[0.86, 0.03], [-0.03, 0.86]]), np.array([0, 1.5])
 branch_one, uno_offset = np.array([[0.2, -0.25], [0.21, 0.23]]), np.array([0, 1.5])
@@ -18,7 +18,7 @@ branch_two, dos_offset = np.array([[-0.15, 0.27], [0.25, 0.26]]), np.array([0, 0
 root, zero_offset = np.array([[0, 0], [0, 0.17]]), np.array([0, 0])
 
 for i in range(steps):
-    dice = random.randrange(0, 100)
+    dice = random.randrange(100)
     if dice < 83:
         position = np.dot(twig, position) + long_offset
     elif dice < 91:
@@ -33,11 +33,10 @@ points = np.array(points)
 plt.ion()
 plt.title('Barnsley Fern')
 plt.gca().set_aspect('equal', adjustable='box')
-scatter = plt.scatter([], [], s=0.1, color='green')
-text = plt.text(-2.8, 10.5, '', fontsize=12, color='red')
-
 plt.xlim(-3, 3)
 plt.ylim(-1, 12)  
+scatter = plt.scatter([], [], s=0.1, color='green')
+text = plt.text(-2.8, 10.5, '', fontsize=12, color='red')
 
 for i in range(0, steps, speed):
     scatter.set_offsets(points[0 : i + speed])
@@ -46,4 +45,3 @@ for i in range(0, steps, speed):
 text.set_text(f'Points: {steps}\nComplete!')
 plt.ioff()
 plt.show()
-
