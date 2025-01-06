@@ -11,7 +11,7 @@ while True:
         break
     else:
         print("Please input the valid speed value.")
-points = np.empty((steps, 2))
+points = []
 twig, long_offset = np.array([[0.86, 0.03], [-0.03, 0.86]]), np.array([0, 1.5])
 branch_one, uno_offset = np.array([[0.2, -0.25], [0.21, 0.23]]), np.array([0, 1.5])
 branch_two, dos_offset = np.array([[-0.15, 0.27], [0.25, 0.26]]), np.array([0, 0.45])
@@ -27,20 +27,21 @@ for i in range(steps):
         position = np.dot(branch_two, position) + dos_offset
     else:
         position = np.dot(root, position) + zero_offset
-    points[i] = position
+    points.append(position.tolist())
+points = np.array(points)
 
 plt.ion()
-plt.title("Barnsley Fern")
-plt.gca().set_aspect("equal", adjustable="box")
+plt.title('Barnsley Fern')
+plt.gca().set_aspect('equal', adjustable='box')
 plt.xlim(-3, 3)
-plt.ylim(-1, 12)
-scatter = plt.scatter([], [], s=0.1, color="green")
-text = plt.text(-2.8, 10.5, "", fontsize=12, color="red")
+plt.ylim(-1, 12)  
+scatter = plt.scatter([], [], s=0.1, color='green')
+text = plt.text(-2.8, 10.5, '', fontsize=12, color='red')
 
 for i in range(0, steps, speed):
     scatter.set_offsets(points[0 : i + speed])
-    text.set_text(f"Points: {i + speed}")
+    text.set_text(f'Points: {i + speed}')
     plt.pause(1e-6)
-text.set_text(f"Points: {steps}\nComplete!")
+text.set_text(f'Points: {steps}\nComplete!')
 plt.ioff()
 plt.show()
